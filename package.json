@@ -1,0 +1,27 @@
+{
+  "name": "Jukes",
+  "version": "0.0.0",
+  "description": "jukebox.today bot",
+  "keywords": [
+    "jukebox"
+  ],
+  "homepage": "https://github.com/Siilwyn/jukes",
+  "bugs": "https://github.com/Siilwyn/jukes/issues",
+  "license": "MIT",
+  "author": "Selwyn <talk@selwyn.cc> (https://selwyn.cc/)",
+  "main": "server.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Siilwyn/jukes.git"
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.15.1",
+    "express": "^4.13.4",
+    "nightmare": "^2.5.1",
+    "shuffle-array": "^1.0.0",
+    "spirit-animals": "^2.0.0"
+  }
+}
