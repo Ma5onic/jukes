@@ -9,9 +9,12 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 app.post('/', function (request, response) {
   console.log(request.body);
+  var requestText = request.body.text.split(' ');
+  var command = requestText[0];
+  var parameter = requestText[1];
 
   // Handle commands
-  switch (request.body.text) {
+  switch (command) {
     case 'create':
       jukebox.init()
         .then(function (roomUrl) {
@@ -44,12 +47,19 @@ app.post('/', function (request, response) {
             "response_type": "in_channel",
             "text": text
           };
-        
+
+          console.log('shuffled', message);
+          response.send(message);
+        });
+      break;
+    case 'connect':
+      jukebox.connect(parameter)
+        .then(function (message) {
           response.send(message);
         });
       break;
     default:
-      response.send('Want to `create` a room, `pause` or `play` a song?');
+      response.send('Want to `create` a room, `pause`, `play` a song or `shuffle`?');
   }
 });
 
