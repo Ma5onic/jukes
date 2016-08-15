@@ -6,7 +6,6 @@ module.exports = {
   init: function () {
     const randomName = spiritAnimals.one().toLowerCase().replace('-');
     const roomUrl = 'http://jukebox.today/' + randomName;
-    console.log(roomUrl);
 
     return nightmare
       .goto(roomUrl)
@@ -87,5 +86,27 @@ module.exports = {
       .catch(function (error) {
         return 'Have you got enough songs to shuffle?';
       });
+  },
+
+  connect: function (roomId) {
+    const roomUrl = 'http://jukebox.today/' + roomId;
+    
+    return nightmare
+      .goto(roomUrl)
+      // Inject dependency directly because crossing the PIC is limited
+      .inject('js', './node_modules/shuffle-array/dist/shuffle-array.min.js')
+      .wait('.load-complete')
+      .evaluate(function () {
+        sendRpc('editUser', {
+          id: App.me.get('id'),
+          displayName: 'JukesBot'
+        });
+      })
+      .then(function () {
+        return 'connected to ', roomUrl;
+      })
+      .catch(function (error) {
+        return 'Connecting to the room failed :( ' + error;
+      })
   }
 };
