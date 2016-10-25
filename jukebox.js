@@ -9,10 +9,10 @@ module.exports = {
 
     return nightmare
       .goto(roomUrl)
-      .wait('.js-setup-privacy[data-privacy="private"]')
+      .wait('.js-setup-privacy[data-privacy="unlisted"]')
       // Allow website JS to bind to DOM
       .wait(1000)
-      .click('.js-setup-privacy[data-privacy="private"]')
+      .click('.js-setup-privacy[data-privacy="unlisted"]')
       // Inject depency directly because crossing the PIC is limited
       .inject('js', './node_modules/shuffle-array/dist/shuffle-array.min.js')
       .wait('.load-complete')
