@@ -1,6 +1,22 @@
 const Nightmare = require('nightmare');
-const nightmare = Nightmare();
+const nightmare = Nightmare({
+  show: process.env.DEVELOP || false,
+  openDevTools: process.env.DEVELOP || false
+});
 const spiritAnimals = require('spirit-animals');
+
+if (process.env.DEVELOP) {
+  const stdin = process.openStdin();
+
+  stdin.addListener('data', function (data) {
+    const argument = data.toString().trim();
+
+    if (typeof module.exports[argument] === 'function') {
+      console.log('running', argument);
+      module.exports[argument]();
+    }
+  });
+}
 
 module.exports = {
   init: function () {

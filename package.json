@@ -15,7 +15,8 @@
     "url": "https://github.com/Siilwyn/jukes.git"
   },
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "develop": "DEVELOP=true node jukebox.js"
   },
   "dependencies": {
     "body-parser": "^1.15.1",
